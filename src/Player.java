@@ -6,15 +6,24 @@ public class Player {
     private int money;
     private ArrayList<Property> properties;
 
-    public Player(){
-
+    public Player(String name){
+        this.name = name;
+        position = 0;
+        properties = new ArrayList<Property>();
     }
 
-    private void buy(){
-
+    //add property to Player's properties
+    private void buy(Property property){
+        properties.add(property);
     }
 
-    private boolean owns(){
+    //move Player
+    public void move(int numSquares){
+        position += numSquares;
+    }
 
+    //check if property is in Player's properties
+    private boolean owns(Property property){
+        return properties.contains(property);
     }
 }
