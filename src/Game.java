@@ -9,7 +9,7 @@ public class Game {
 
     //pass turn to next Player
     private void turn(Player currentPlayer){
-
+        currentPlayer.move(roll());
     }
 
     //return sum of two dice rolls
@@ -19,6 +19,8 @@ public class Game {
 
         roll1 = (int) Math.random() * 6 + 1;
         roll2 = (int) Math.random() * 6 + 1;
+
+        System.out.println("You rolled a " + (roll1 + roll2));
         return roll1 + roll2;
     }
 }

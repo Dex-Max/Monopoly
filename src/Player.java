@@ -20,6 +20,13 @@ public class Player {
     //move Player
     public void move(int numSquares){
         position += numSquares;
+
+        //if pass GO
+        if(position >= 40){
+            System.out.println(name + " passed GO and collected $200");
+            money += 200;
+            position %= 40;
+        }
     }
 
     //check if property is in Player's properties
