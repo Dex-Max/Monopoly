@@ -1,5 +1,5 @@
 public class Game {
-    Square[] board = new Square[40];
+    Board board = new Board();
     Player[] players;
 
 
@@ -9,7 +9,12 @@ public class Game {
 
     //pass turn to next Player
     private void turn(Player currentPlayer){
-        currentPlayer.move(roll());
+        currentPlayer.move(roll());             //moves player
+
+        /** board.getSquare(currentPlayer.getPosition()).landedOn(); //does action of landed on square
+         * or
+         * currentPlayer.landedOn(board.getSquare(currentPlayer.getPosition()));
+         */
     }
 
     //return sum of two dice rolls
@@ -23,4 +28,5 @@ public class Game {
         System.out.println("You rolled a " + (roll1 + roll2));
         return roll1 + roll2;
     }
+
 }
