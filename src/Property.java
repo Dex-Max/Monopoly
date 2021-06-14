@@ -2,6 +2,7 @@ public class Property extends Purchasable{
 
     private Group group;
 
+    private int numHouses = 0; //number of houses currently on property
     private int houseCost;
     //rent based on number of houses
     private int rent1;
@@ -10,10 +11,24 @@ public class Property extends Purchasable{
     private int rent4;
     private int rentH;
 
-    //TODO
     @Override
     public int getRent() {
-        return 0;
+        switch(numHouses){
+            case 0:
+                return rent;
+            case 1:
+                return rent1;
+            case 2:
+                return rent2;
+            case 3:
+                return rent3;
+            case 4:
+                return rent4;
+            case 5:
+                return rentH;
+            default:
+                return -1;
+        }
     }
 
     public enum Group{

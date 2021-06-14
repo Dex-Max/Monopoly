@@ -10,9 +10,8 @@ public class Game {
     //pass turn to next Player
     private void turn(Player currentPlayer){
         currentPlayer.move(roll());             //moves player
-
-        /** board.getSquare(currentPlayer.getPosition()).landedOn(); //does action of landed on square
-         * or
+        board.getSquareAt(currentPlayer.getPosition()).landedOn(); //does action of landed on square
+         /*
          * currentPlayer.landedOn(board.getSquare(currentPlayer.getPosition()));
          */
     }

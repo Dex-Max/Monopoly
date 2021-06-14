@@ -11,6 +11,11 @@ public class Player {
         position = 0;
         properties = new ArrayList<Property>();
     }
+    public int getPosition(){ return position; }
+
+    public void addMoney(int addMoney){
+        this.money += addMoney;
+    }
 
     //add property to Player's properties
     private void buy(Property property){

@@ -10,12 +10,12 @@ public class Board {
         //create community chest/chance deck
     }
 
-    public Square getSquare(int position){
+    public Square getSquareAt(int position){
         return board[position];
     }
 
-    private Square createSquare(int index){
-        switch(index){
+    private Square createSquare(int position){
+        switch(position){
             case 0:
             case 1:
                 return new Property("Mediterranean Avenue", Property.Group.BROWN, 60, 2, 10, 30, 90, 160, 250);

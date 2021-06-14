@@ -1,6 +1,7 @@
 public abstract class Purchasable extends Square {
     protected int price;
     protected int rent;
+    protected Player owner = null;
 
     public Purchasable(String name, int price, int rent){
         super(name);
