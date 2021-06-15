@@ -4,6 +4,7 @@ public class Property extends Purchasable{
 
     private int numHouses = 0; //number of houses currently on property
     private int houseCost;
+
     //rent based on number of houses
     private int rent1;
     private int rent2;

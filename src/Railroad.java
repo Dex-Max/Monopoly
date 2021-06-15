@@ -6,6 +6,7 @@ public class Railroad extends Purchasable {
     //TODO
     @Override
     public int getRent() {
+
         return 0;
     }
 }

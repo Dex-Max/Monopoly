@@ -4,12 +4,13 @@ public class Player {
     private String name;
     private int position;
     private int money;
-    private ArrayList<Property> properties;
+    private int numUtilities = 0;
+    private int numRailroads = 0;
+    private ArrayList<Purchasable> properties = new ArrayList<Purchasable>();
 
     public Player(String name){
         this.name = name;
         position = 0;
-        properties = new ArrayList<Property>();
     }
     public int getPosition(){ return position; }
 
@@ -17,8 +18,13 @@ public class Player {
         this.money += addMoney;
     }
 
+    public void pay(Player receiving, int amount){
+        receiving.addMoney(amount);
+        addMoney(-amount);
+    }
+
     //add property to Player's properties
-    private void buy(Property property){
+    public void buy(Purchasable property){
         properties.add(property);
     }
 
