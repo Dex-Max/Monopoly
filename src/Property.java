@@ -32,6 +32,12 @@ public class Property extends Purchasable{
         }
     }
 
+    public void buyHouse(){
+        owner.addMoney(-houseCost);
+        numHouses++;
+        System.out.println("Purchased a house on " + name + " for " + houseCost);
+    }
+
     public enum Group{
         BROWN, SKY, PINK, ORANGE, RED,
             YELLOW, GREEN, BLUE
@@ -45,5 +51,20 @@ public class Property extends Purchasable{
         this.rent3 = rent3;
         this.rent4 = rent4;
         this.rentH = rentH;
+
+        switch(group){
+            case BROWN:
+            case SKY:
+                houseCost = 50;
+            case PINK:
+            case ORANGE:
+                houseCost = 100;
+            case RED:
+            case YELLOW:
+                houseCost = 150;
+            case GREEN:
+            case BLUE:
+                houseCost = 200;
+        }
     }
 }

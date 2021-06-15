@@ -32,6 +32,7 @@ public abstract class Purchasable extends Square {
         if(response == "y"){
             currentPlayer.buy(this);
             owner = currentPlayer;
+
         }
     }
 }
