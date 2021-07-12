@@ -7,6 +7,8 @@ public class Game {
         players = new Player[numPlayers];
     }
 
+    public Board getBoard() { return board; }
+
     //pass turn to next Player
     private void turn(Player currentPlayer){
         currentPlayer.move(roll());             //moves player
@@ -14,6 +16,10 @@ public class Game {
          /*
          * currentPlayer.landedOn(board.getSquare(currentPlayer.getPosition()));
          */
+
+        //TODO switch for user choice
+        //case user wants to buy house
+
     }
 
     //return sum of two dice rolls

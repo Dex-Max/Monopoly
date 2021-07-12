@@ -12,6 +12,7 @@ public class Property extends Purchasable{
     private int rent4;
     private int rentH;
 
+    //TODO make rent double for color-group
     @Override
     public int getRent() {
         switch(numHouses){
@@ -37,6 +38,8 @@ public class Property extends Purchasable{
         numHouses++;
         System.out.println("Purchased a house on " + name + " for " + houseCost);
     }
+
+    public Group getGroup() { return group; }
 
     public enum Group{
         BROWN, SKY, PINK, ORANGE, RED,

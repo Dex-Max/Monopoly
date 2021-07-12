@@ -44,4 +44,17 @@ public class Player {
     private boolean owns(Property property){
         return properties.contains(property);
     }
+
+    public boolean ownsGroup(Property.Group group, Board board){
+        Square currentSquare;
+
+        for(int i = 0; i < 41; i++){
+            currentSquare = board.getSquareAt(i);
+            if(currentSquare instanceof Property && ((Property) currentSquare).getGroup() == group && !owns((Property) currentSquare)){
+                return false;
+            }
+        }
+
+        return true;
+    }
 }
