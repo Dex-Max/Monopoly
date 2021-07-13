@@ -6,7 +6,7 @@ public class Player {
     private int money;
     private int numUtilities = 0;
     private int numRailroads = 0;
-    private ArrayList<Purchasable> properties = new ArrayList<Purchasable>();
+    private ArrayList<Property> properties = new ArrayList<Property>();
 
     public Player(String name){
         this.name = name;
@@ -24,7 +24,7 @@ public class Player {
     }
 
     //add property to Player's properties
-    public void buy(Purchasable property){
+    public void buy(Property property){
         properties.add(property);
     }
 
@@ -45,12 +45,12 @@ public class Player {
         return properties.contains(property);
     }
 
-    public boolean ownsGroup(Property.Group group, Board board){
+    public boolean ownsGroup(ColorProperty.Group group, Board board){
         Square currentSquare;
 
         for(int i = 0; i < 41; i++){
             currentSquare = board.getSquareAt(i);
-            if(currentSquare instanceof Property && ((Property) currentSquare).getGroup() == group && !owns((Property) currentSquare)){
+            if(currentSquare instanceof ColorProperty && ((ColorProperty) currentSquare).getGroup() == group && !owns((ColorProperty) currentSquare)){
                 return false;
             }
         }

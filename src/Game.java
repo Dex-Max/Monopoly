@@ -19,7 +19,6 @@ public class Game {
 
         //TODO switch for user choice
         //case user wants to buy house
-
     }
 
     //return sum of two dice rolls

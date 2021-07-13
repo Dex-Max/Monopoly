@@ -1,4 +1,4 @@
-public class Railroad extends Purchasable {
+public class Railroad extends Property {
     public Railroad(String name){
         super(name, 200, 0);
     }

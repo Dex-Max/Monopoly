@@ -8,7 +8,7 @@ public class Tax extends Square{
 
     //TODO
     @Override
-    public void landedOn() {
+    public void landedOn(Player p) {
 
     }
 }

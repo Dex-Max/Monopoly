@@ -1,4 +1,4 @@
-public class Utility extends Purchasable{
+public class Utility extends Property {
 
     public Utility(String name){
         super(name, 150, 0);
