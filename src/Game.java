@@ -12,7 +12,7 @@ public class Game {
     //pass turn to next Player
     private void turn(Player currentPlayer){
         currentPlayer.move(roll());             //moves player
-        board.getSquareAt(currentPlayer.getPosition()).landedOn(currentPlayer); //does action of landed on square
+        landedOn(currentPlayer); //does action of landed on square
          /*
          * currentPlayer.landedOn(board.getSquare(currentPlayer.getPosition()));
          */
@@ -26,11 +26,19 @@ public class Game {
         int roll1;
         int roll2;
 
-        roll1 = (int) Math.random() * 6 + 1;
-        roll2 = (int) Math.random() * 6 + 1;
+        roll1 = (int) (Math.random() * 6 + 1);
+        roll2 = (int) (Math.random() * 6 + 1);
 
-        System.out.println("You rolled a " + (roll1 + roll2));
+        System.out.println("You rolled a " + roll1 + " and " + roll2);
         return roll1 + roll2;
+    }
+
+    //TODO Move line on turn to here
+    private void landedOn(Player currentPlayer){
+        Square currentSquare = board.getSquareAt(currentPlayer.getPosition());
+
+        System.out.println(currentPlayer.getName() + " landed on " + currentSquare.getName());
+        currentSquare.doAction(currentPlayer);
     }
 
 }

@@ -12,7 +12,7 @@ public abstract class Property extends Square {
     public abstract int getRent();
 
     @Override
-    public void landedOn(Player currentPlayer) {
+    public void doAction(Player currentPlayer) {
         if(currentPlayer == owner);
             //square is owned by the currentPlayer
         else if(owner != null) {

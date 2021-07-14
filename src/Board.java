@@ -3,7 +3,7 @@ public class Board {
 
     public Board(){
         //creating all squares on the board
-        for(int i = 0; i < 41; i++){
+        for(int i = 0; i < 40; i++){
             board[i] = createSquare(i);
         }
 
@@ -14,9 +14,11 @@ public class Board {
         return board[position];
     }
 
+    //TODO finish board initialization
     private Square createSquare(int position){
         switch(position){
             case 0:
+                return null;
             case 1:
                 return new ColorProperty("Mediterranean Avenue", ColorProperty.Group.BROWN, 60, 2, 10, 30, 90, 160, 250);
             case 2:
@@ -35,7 +37,7 @@ public class Board {
             case 9:
                 return new ColorProperty("Connecticut Avenue", ColorProperty.Group.SKY, 120, 8, 40, 100, 300, 450, 600);
             case 10:
-
+                return null;
             case 11:
                 return new ColorProperty("St. Charles Place", ColorProperty.Group.PINK, 140, 10, 50, 150, 450, 625, 750);
             case 12:
@@ -55,6 +57,7 @@ public class Board {
             case 19:
                 return new ColorProperty("New York Avenue", ColorProperty.Group.ORANGE, 200, 16, 80, 220, 600, 800, 1000);
             case 20:
+                return null;
             case 21:
                 return new ColorProperty("Kentucky Avenue", ColorProperty.Group.RED, 220, 18, 90, 250, 700, 875, 1050);
             case 22:
@@ -74,7 +77,7 @@ public class Board {
             case 29:
                 return new ColorProperty("Marvin Gardens", ColorProperty.Group.YELLOW, 280, 24, 120, 360, 850, 1025, 1200);
             case 30:
-
+                return null;
             case 31:
                 return new ColorProperty("Pacific Avenue", ColorProperty.Group.GREEN, 300, 26, 130, 390, 900, 1100, 1275);
             case 32:

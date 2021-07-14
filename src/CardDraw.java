@@ -12,7 +12,7 @@ public class CardDraw extends Square{
 
     //TODO
     @Override
-    public void landedOn(Player p) {
+    public void doAction(Player p) {
 
     }
 }

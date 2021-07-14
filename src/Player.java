@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 
 public class Player {
-    private String name;
+    private final String name;
     private int position;
     private int money;
     private int numUtilities = 0;
@@ -12,7 +12,10 @@ public class Player {
         this.name = name;
         position = 0;
     }
-    public int getPosition(){ return position; }
+
+    public int getPosition() { return position; }
+
+    public String getName() { return name; }
 
     public void addMoney(int addMoney){
         this.money += addMoney;
