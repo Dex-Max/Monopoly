@@ -1,8 +1,8 @@
 import java.util.Scanner;
 
 public abstract class Property extends Square {
-    private int price;
-    private int rent;
+    private final int price;
+    private final int rent;
     private Player owner = null;
 
     public Property(String name, int price, int rent){
@@ -10,8 +10,12 @@ public abstract class Property extends Square {
         this.price = price;
         this.rent = rent;
     }
+
+    public Player getOwner() {
+        return owner;
+    }
     public int getPrice(){
-        return rent;
+        return price;
     }
 
     public abstract int getRent();

@@ -17,7 +17,7 @@ public class ColorProperty extends Property {
     public int getRent() {
         switch(numHouses){
             case 0:
-                return rent;
+                return getRent();
             case 1:
                 return rent1;
             case 2:
@@ -34,7 +34,7 @@ public class ColorProperty extends Property {
     }
 
     public void buyHouse(){
-        owner.addMoney(-houseCost);
+        getOwner().addMoney(-getPrice());
         numHouses++;
         System.out.println("Purchased a house on " + name + " for " + houseCost);
     }

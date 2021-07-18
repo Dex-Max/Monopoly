@@ -3,7 +3,7 @@ import java.util.ArrayList;
 public class Player {
     private final String name;
     private int position;
-    private int money;
+    private int money = 1500;
     private int numUtilities = 0;
     private int numRailroads = 0;
     private ArrayList<Property> properties = new ArrayList<Property>();
