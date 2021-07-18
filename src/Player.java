@@ -17,6 +17,8 @@ public class Player {
 
     public String getName() { return name; }
 
+    public int getMoney() { return money; }
+
     public void addMoney(int addMoney){
         this.money += addMoney;
     }
@@ -28,6 +30,7 @@ public class Player {
 
     //add property to Player's properties
     public void buy(Property property){
+        addMoney(-property.getPrice());
         properties.add(property);
     }
 
