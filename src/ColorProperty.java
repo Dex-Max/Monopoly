@@ -1,16 +1,16 @@
 public class ColorProperty extends Property {
 
-    private Group group;
+    private final Group group;
 
     private int numHouses = 0; //number of houses currently on property
-    private int houseCost;
+    private final int houseCost;
 
     //rent based on number of houses
-    private int rent1;
-    private int rent2;
-    private int rent3;
-    private int rent4;
-    private int rentH;
+    private final int rent1;
+    private final int rent2;
+    private final int rent3;
+    private final int rent4;
+    private final int rentH;
 
     //TODO make rent double for color-group
     @Override
@@ -59,15 +59,21 @@ public class ColorProperty extends Property {
             case BROWN:
             case SKY:
                 houseCost = 50;
+                break;
             case PINK:
             case ORANGE:
                 houseCost = 100;
+                break;
             case RED:
             case YELLOW:
                 houseCost = 150;
+                break;
             case GREEN:
             case BLUE:
                 houseCost = 200;
+                break;
+            default:
+                houseCost = -1;
         }
     }
 }

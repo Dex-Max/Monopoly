@@ -1,5 +1,5 @@
 public class Square {
-    String name;
+    final String name;
 
     public void doAction(Player currentPlayer) {};
 

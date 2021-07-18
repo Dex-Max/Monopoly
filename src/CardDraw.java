@@ -1,5 +1,5 @@
 public class CardDraw extends Square{
-    private Card cardType;
+    private final Card cardType;
 
     public enum Card{
         COMMUNITY_CHEST, CHANCE
