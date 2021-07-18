@@ -11,11 +11,9 @@ public class Game {
 
     //pass turn to next Player
     private void turn(Player currentPlayer){
+        System.out.println(currentPlayer.getName() + "'s turn! You are on ");
         currentPlayer.move(roll());             //moves player
         landedOn(currentPlayer); //does action of landed on square
-         /*
-         * currentPlayer.landedOn(board.getSquare(currentPlayer.getPosition()));
-         */
 
         //TODO switch for user choice
         //case user wants to buy house
@@ -32,8 +30,7 @@ public class Game {
         System.out.println("You rolled a " + roll1 + " and " + roll2);
         return roll1 + roll2;
     }
-
-    //TODO Move line on turn to here
+    
     private void landedOn(Player currentPlayer){
         Square currentSquare = board.getSquareAt(currentPlayer.getPosition());
 

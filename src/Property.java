@@ -17,6 +17,7 @@ public abstract class Property extends Square {
             //square is owned by the currentPlayer
         else if(owner != null) {
             //square is owned by someone else
+            System.out.println(currentPlayer.getName() + " paid " + owner.getName() + " $" + getRent() + " in rent");
             currentPlayer.pay(owner, getRent());
         } else {
             //square can be bought
@@ -32,7 +33,6 @@ public abstract class Property extends Square {
         if(response == "y"){
             currentPlayer.buy(this);
             owner = currentPlayer;
-
         }
     }
 }

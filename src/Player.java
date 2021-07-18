@@ -12,6 +12,7 @@ public class Player {
         this.name = name;
         position = 0;
     }
+    public Square
 
     public int getPosition() { return position; }
 
