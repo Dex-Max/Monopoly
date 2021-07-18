@@ -6,7 +6,6 @@ public class Railroad extends Property {
     //TODO
     @Override
     public int getRent() {
-
         return 0;
     }
 }

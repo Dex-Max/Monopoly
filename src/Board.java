@@ -18,10 +18,11 @@ public class Board {
     private Square createSquare(int position){
         switch(position){
             case 0:
-                return null;
+                return new Square("GO");
             case 1:
                 return new ColorProperty("Mediterranean Avenue", ColorProperty.Group.BROWN, 60, 2, 10, 30, 90, 160, 250);
             case 2:
+                return new CardDraw(CardDraw.Card.COMMUNITY_CHEST);
             case 3:
                 return new ColorProperty("Baltic Avenue", ColorProperty.Group.BROWN, 60, 4, 20, 60, 180, 320, 450);
             case 4:
@@ -37,7 +38,7 @@ public class Board {
             case 9:
                 return new ColorProperty("Connecticut Avenue", ColorProperty.Group.SKY, 120, 8, 40, 100, 300, 450, 600);
             case 10:
-                return null;
+                return new Square("Jail");
             case 11:
                 return new ColorProperty("St. Charles Place", ColorProperty.Group.PINK, 140, 10, 50, 150, 450, 625, 750);
             case 12:
@@ -57,7 +58,7 @@ public class Board {
             case 19:
                 return new ColorProperty("New York Avenue", ColorProperty.Group.ORANGE, 200, 16, 80, 220, 600, 800, 1000);
             case 20:
-                return null;
+                return new Square("Free Parking");
             case 21:
                 return new ColorProperty("Kentucky Avenue", ColorProperty.Group.RED, 220, 18, 90, 250, 700, 875, 1050);
             case 22:
@@ -77,7 +78,7 @@ public class Board {
             case 29:
                 return new ColorProperty("Marvin Gardens", ColorProperty.Group.YELLOW, 280, 24, 120, 360, 850, 1025, 1200);
             case 30:
-                return null;
+                return new Square("Go to Jail");
             case 31:
                 return new ColorProperty("Pacific Avenue", ColorProperty.Group.GREEN, 300, 26, 130, 390, 900, 1100, 1275);
             case 32:

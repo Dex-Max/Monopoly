@@ -1,7 +1,7 @@
-public abstract class Square {
-    protected String name;
+public class Square {
+    String name;
 
-    public abstract void doAction(Player currentPlayer);
+    public void doAction(Player currentPlayer) {};
 
     public String getName() { return name; }
 

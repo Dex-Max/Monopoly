@@ -23,7 +23,7 @@ public class Game {
 
     //pass turn to next Player
     private void turn(Player currentPlayer){
-        System.out.println(currentPlayer.getName() + "'s turn! You are on ");
+        System.out.println(currentPlayer.getName() + "'s turn! You are on " + board.getSquareAt(currentPlayer.getPosition()).name);
         currentPlayer.move(roll());             //moves player
         landedOn(currentPlayer); //does action of landed on square
 
@@ -33,6 +33,10 @@ public class Game {
 
     //return sum of two dice rolls
     private int roll(){
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Press enter to roll");
+        scanner.next();
+
         int roll1;
         int roll2;
 
