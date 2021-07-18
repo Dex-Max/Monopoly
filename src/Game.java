@@ -1,3 +1,5 @@
+import java.util.Scanner;
+
 public class Game {
     Board board = new Board();
     Player[] players;
@@ -9,10 +11,17 @@ public class Game {
 
     public Board getBoard() { return board; }
 
-    //pass turn to next Player
-    public void turn(){
+    public void startGame(){
+        Scanner scanner = new Scanner(System.in);
+        for(int i = 1; i <= players.length; i++){
+            System.out.println("Player " + i + " name: ");
+            players[i - 1] = new Player(scanner.next());
+        }
+
         turn(players[0]);
     }
+
+    //pass turn to next Player
     private void turn(Player currentPlayer){
         System.out.println(currentPlayer.getName() + "'s turn! You are on ");
         currentPlayer.move(roll());             //moves player
