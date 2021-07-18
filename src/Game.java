@@ -10,6 +10,9 @@ public class Game {
     public Board getBoard() { return board; }
 
     //pass turn to next Player
+    public void turn(){
+        turn(players[0]);
+    }
     private void turn(Player currentPlayer){
         System.out.println(currentPlayer.getName() + "'s turn! You are on ");
         currentPlayer.move(roll());             //moves player
