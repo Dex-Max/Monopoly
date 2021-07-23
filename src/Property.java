@@ -14,11 +14,14 @@ public abstract class Property extends Square {
     public Player getOwner() {
         return owner;
     }
+
     public int getPrice(){
         return price;
     }
 
-    public abstract int getRent();
+    public int getRent(){
+        return rent;
+    }
 
     @Override
     public void doAction(Player currentPlayer) {

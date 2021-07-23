@@ -5,6 +5,7 @@ public class Board {
         //creating all squares on the board
         for(int i = 0; i < 40; i++){
             board[i] = createSquare(i);
+            board[i].index = i;
         }
 
         //create community chest/chance deck

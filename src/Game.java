@@ -18,9 +18,10 @@ public class Game {
 
     //pass turn to next Player
     private void turn(Player currentPlayer){
-        System.out.println(currentPlayer.getName() + "'s turn! You have $" + currentPlayer.getMoney() + ". You are on " + board.getSquareAt(currentPlayer.getPosition()).name);
+        System.out.println("\n" + currentPlayer.getName() + "'s turn!\nPosition: " + board.getSquareAt(currentPlayer.getPosition()).name + "\nMoney: $" + currentPlayer.getMoney());
         currentPlayer.move(roll());
         landedOn(currentPlayer);
+        currentPlayer.listProperties();
         endTurn(currentPlayer);
 
         //TODO switch for user choice

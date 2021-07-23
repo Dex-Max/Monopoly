@@ -17,7 +17,7 @@ public class ColorProperty extends Property {
     public int getRent() {
         switch(numHouses){
             case 0:
-                return getRent();
+                return super.getRent();
             case 1:
                 return rent1;
             case 2:
