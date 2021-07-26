@@ -21,10 +21,30 @@ public class Game {
         System.out.println("\n" + currentPlayer.getName() + "'s turn!\nPosition: " + board.getSquareAt(currentPlayer.getPosition()).name + "\nMoney: $" + currentPlayer.getMoney());
         currentPlayer.move(roll());
         landedOn(currentPlayer);
-        currentPlayer.listProperties();
-        endTurn(currentPlayer);
 
-        //TODO switch for user choice
+        //maybe move to Player
+        showOptions(currentPlayer);
+    }
+
+    private void showOptions(Player currentPlayer){
+        System.out.println("Additional Actions:");
+        System.out.println("(1) List Properties\n(2) Buy Houses\n(3) End Turn");
+
+        try {
+            int choice = Integer.parseInt(Input.read());
+
+            switch(choice){
+                case 1:
+                    currentPlayer.listProperties();
+                    showOptions(currentPlayer);
+                case 2:
+                    currentPlayer.buyHouse();
+                case 3:
+                    endTurn(currentPlayer);
+            }
+        } catch (NumberFormatException e){
+            System.out.println("Must enter a valid number");
+        }
     }
 
     private void endTurn(Player currentPlayer){
