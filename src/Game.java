@@ -38,13 +38,18 @@ public class Game {
                     currentPlayer.listProperties();
                     showOptions(currentPlayer);
                 case 2:
-                    currentPlayer.buyHouse();
+                    buyHouseOptions(currentPlayer);
                 case 3:
                     endTurn(currentPlayer);
             }
         } catch (NumberFormatException e){
             System.out.println("Must enter a valid number");
         }
+    }
+
+    private void buyHouseOptions(Player currentPlayer){
+        System.out.println("Select property to purchase house on: ");
+        currentPlayer.listOwnColorGroup(board);
     }
 
     private void endTurn(Player currentPlayer){

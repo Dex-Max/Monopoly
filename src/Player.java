@@ -77,6 +77,15 @@ public class Player {
         }
     }
 
+    //list all properties that Player owns color group
+    public void listOwnColorGroup(Board board){
+        for(Property property: properties){
+            if(property instanceof ColorProperty && ownsGroup(((ColorProperty) property).getGroup(), board)){
+                System.out.println(property.getName());
+            }
+        }
+    }
+
     //check if property is in Player's properties
     private boolean owns(Property property){
         return properties.contains(property);
