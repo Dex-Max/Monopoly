@@ -1,7 +1,7 @@
 public class Square implements Comparable<Square>{
-    int index;
+    protected int index;
 
-    final String name;
+    protected final String name;
 
     public void doAction(Player currentPlayer) {};
 
@@ -9,6 +9,10 @@ public class Square implements Comparable<Square>{
 
     public Square(String name){
         this.name = name;
+    }
+
+    public String toString(){
+        return name;
     }
 
     public int compareTo(Square s){

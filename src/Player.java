@@ -1,4 +1,5 @@
 import java.awt.*;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -40,22 +41,23 @@ public class Player {
     private void sortPropertiesByGroup(ArrayList<Property> properties){
         ArrayList<Utility> utilities = new ArrayList<>();
         ArrayList<Railroad> railroads = new ArrayList<>();
+        ArrayList<Property> sorted = new ArrayList<>();
 
         for(Property property : properties){
             if(property instanceof Utility){
                 utilities.add((Utility) property);
-                properties.remove(property);
             } else if(property instanceof Railroad){
                 railroads.add((Railroad) property);
-                properties.remove(property);
+            } else {
+                sorted.add(property);
             }
         }
         Collections.sort(utilities);
         Collections.sort(railroads);
-        Collections.sort(properties);
+        Collections.sort(sorted);
 
-        properties.addAll(railroads);
-        properties.addAll(utilities);
+        sorted.addAll(railroads);
+        sorted.addAll(utilities);
     }
 
     //move Player
@@ -78,12 +80,14 @@ public class Player {
     }
 
     //list all properties that Player owns color group
-    public void listOwnColorGroup(Board board){
+    public ArrayList<ColorProperty> listOwnColorGroup(Board board){
+        ArrayList<ColorProperty> list = new ArrayList<>();
         for(Property property: properties){
             if(property instanceof ColorProperty && ownsGroup(((ColorProperty) property).getGroup(), board)){
-                System.out.println(property.getName());
+                list.add((ColorProperty) property);
             }
         }
+        return list;
     }
 
     //check if property is in Player's properties
@@ -95,7 +99,7 @@ public class Player {
         Square currentSquare;
 
         //check each square on the board that is in group, and checks if player owns
-        for(int i = 0; i < 41; i++){
+        for(int i = 0; i < 40; i++){
             currentSquare = board.getSquareAt(i);
             if(currentSquare instanceof ColorProperty && ((ColorProperty) currentSquare).getGroup() == group && !owns((Property) currentSquare)){
                 return false;

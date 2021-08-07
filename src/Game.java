@@ -2,6 +2,7 @@ import java.util.ArrayList;
 
 public class Game {
     private final Board board = new Board();
+    private Dice dice = new Dice();
     private ArrayList<Player> players = new ArrayList<Player>();
 
     public Board getBoard() { return board; }
@@ -18,11 +19,9 @@ public class Game {
 
     //pass turn to next Player
     private void turn(Player currentPlayer){
-        System.out.println("\n" + currentPlayer.getName() + "'s turn!\nPosition: " + board.getSquareAt(currentPlayer.getPosition()).name + "\nMoney: $" + currentPlayer.getMoney());
-        currentPlayer.move(roll());
+        System.out.println("\n" + currentPlayer.getName() + "'s turn!\nPosition: " + board.getSquareAt(currentPlayer.getPosition()).getName() + "\nMoney: $" + currentPlayer.getMoney());
+        currentPlayer.move(dice.roll());
         landedOn(currentPlayer);
-
-        //maybe move to Player
         showOptions(currentPlayer);
     }
 
@@ -49,7 +48,7 @@ public class Game {
 
     private void buyHouseOptions(Player currentPlayer){
         System.out.println("Select property to purchase house on: ");
-        currentPlayer.listOwnColorGroup(board);
+        selectOptions(currentPlayer.listOwnColorGroup(board));
     }
 
     private void endTurn(Player currentPlayer){
@@ -61,21 +60,14 @@ public class Game {
         }
     }
 
-    //return sum of two dice rolls
-    private int roll(){
-        System.out.print("Press enter to roll");
-        Input.read();
+    public void selectOptions(ArrayList<?> list){
+        for(int i = 1; i <= list.size(); i++){
+            System.out.println(i + ". " + list.get(1).toString());
+        }
 
-        int roll1;
-        int roll2;
 
-        roll1 = (int) (Math.random() * 6 + 1);
-        roll2 = (int) (Math.random() * 6 + 1);
-
-        System.out.println("Rolled a " + roll1 + " and " + roll2);
-        return roll1 + roll2;
     }
-    
+
     private void landedOn(Player currentPlayer){
         Square currentSquare = board.getSquareAt(currentPlayer.getPosition());
 
