@@ -31,6 +31,17 @@ public class Player {
         addMoney(-amount);
     }
 
+    public void move(int numSquares){
+        position += numSquares;
+
+        //if pass GO
+        if(position >= 40){
+            System.out.println(name + " passed GO and collected $200");
+            money += 200;
+            position %= 40;
+        }
+    }
+
     //add property to Player's properties
     public void buy(Property property){
         addMoney(-property.getPrice());
@@ -60,19 +71,6 @@ public class Player {
         sorted.addAll(utilities);
     }
 
-    //move Player
-    public void move(int numSquares){
-        position += numSquares;
-
-        //if pass GO
-        if(position >= 40){
-            System.out.println(name + " passed GO and collected $200");
-            money += 200;
-            position %= 40;
-        }
-    }
-
-    //list all properties that Player owns
     public void listProperties(){
         for(Property property : properties){
             System.out.println(property.getName());
@@ -90,11 +88,18 @@ public class Player {
         return list;
     }
 
+    //return list of all properties that Player can place house
+    public ArrayList<ColorProperty> getHouseableProperties(){
+        getOwnColorGroupList().removeIf(property -> property.getNumHouses() == 5);
+        return getOwnColorGroupList();
+    }
+
     //check if property is in Player's properties
     private boolean owns(Property property){
         return properties.contains(property);
     }
 
+    //check if Player owns all of a certain color group
     public boolean ownsGroup(ColorProperty.Group group){
         int count = 0;
 

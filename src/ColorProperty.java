@@ -31,6 +31,8 @@ public class ColorProperty extends Property {
 
     public Group getGroup() { return group; }
 
+    public int getNumHouses() { return numHouses; }
+
     //TODO make rent double for color-group
     @Override
     public int getRent() {

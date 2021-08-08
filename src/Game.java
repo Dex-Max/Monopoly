@@ -1,3 +1,4 @@
+import java.awt.image.AreaAveragingScaleFilter;
 import java.util.ArrayList;
 
 public class Game {
@@ -57,8 +58,9 @@ public class Game {
     }
 
     private void buyHouseOptions(Player currentPlayer){
+        ArrayList<ColorProperty> houseableProperty;
         System.out.println("Select property to purchase house on: ");
-        ColorProperty houseProperty = (ColorProperty) input.selectOptions(currentPlayer.getOwnColorGroupList());
+        ColorProperty houseProperty = (ColorProperty) input.selectOptions(currentPlayer.getHouseableProperties());
         houseProperty.addHouse();
     }
 
