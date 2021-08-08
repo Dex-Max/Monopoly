@@ -58,7 +58,7 @@ public class Game {
 
     private void buyHouseOptions(Player currentPlayer){
         System.out.println("Select property to purchase house on: ");
-        ColorProperty houseProperty = (ColorProperty) input.selectOptions(currentPlayer.listOwnColorGroup(board));
+        ColorProperty houseProperty = (ColorProperty) input.selectOptions(currentPlayer.getOwnColorGroupList());
         houseProperty.addHouse();
     }
 

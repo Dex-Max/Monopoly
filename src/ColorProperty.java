@@ -12,35 +12,6 @@ public class ColorProperty extends Property {
     private final int rent4;
     private final int rentH;
 
-    //TODO make rent double for color-group
-    @Override
-    public int getRent() {
-        switch(numHouses){
-            case 0:
-                return super.getRent();
-            case 1:
-                return rent1;
-            case 2:
-                return rent2;
-            case 3:
-                return rent3;
-            case 4:
-                return rent4;
-            case 5:
-                return rentH;
-            default:
-                return -1;
-        }
-    }
-
-    public void addHouse(){
-        getOwner().addMoney(-houseCost);
-        numHouses++;
-        System.out.println("Purchased a house on " + name + " for " + houseCost);
-    }
-
-    public Group getGroup() { return group; }
-
     public enum Group{
         BROWN(2),
         SKY(3),
@@ -57,6 +28,51 @@ public class ColorProperty extends Property {
             this.maxInGroup = maxInGroup;
         }
     }
+
+    public Group getGroup() { return group; }
+
+    //TODO make rent double for color-group
+    @Override
+    public int getRent() {
+        int rent = 0;
+        switch(numHouses){
+            case 0:
+                rent = super.getRent();
+                if(getOwner().ownsGroup(group)){
+                    rent *= 2;
+                }
+                break;
+            case 1:
+                rent = rent1;
+                break;
+            case 2:
+                rent = rent2;
+                break;
+            case 3:
+                rent = rent3;
+                break;
+            case 4:
+                rent = rent4;
+                break;
+            case 5:
+                rent = rentH;
+                break;
+        }
+
+        return rent;
+    }
+
+    public void addHouse(){
+        getOwner().addMoney(-houseCost);
+        numHouses++;
+        if(numHouses == 5){
+            System.out.println("Purchased a hotel on " + name + " for " + houseCost);
+        } else {
+            System.out.println("Purchased a house on " + name + " for " + houseCost);
+        }
+    }
+
+
 
     public ColorProperty(String name, Group group, int price, int rent, int rent1, int rent2, int rent3, int rent4, int rentH){
         super(name, price, rent);

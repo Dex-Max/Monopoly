@@ -79,8 +79,8 @@ public class Player {
         }
     }
 
-    //list all properties that Player owns color group
-    public ArrayList<ColorProperty> listOwnColorGroup(Board board){
+    //returns list of all properties that Player owns color group
+    public ArrayList<ColorProperty> getOwnColorGroupList(){
         ArrayList<ColorProperty> list = new ArrayList<>();
         for(Property property: properties){
             if(property instanceof ColorProperty && ownsGroup(((ColorProperty) property).getGroup())){
