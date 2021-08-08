@@ -34,7 +34,7 @@ public class ColorProperty extends Property {
     }
 
     public void addHouse(){
-        getOwner().addMoney(-getPrice());
+        getOwner().addMoney(-houseCost);
         numHouses++;
         System.out.println("Purchased a house on " + name + " for " + houseCost);
     }

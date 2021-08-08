@@ -2,9 +2,9 @@ public class Dice {
     public int roll1;
     public int roll2;
 
-    public int roll(){
+    public int roll(Input input){
         System.out.print("Press enter to roll");
-        Input.read();
+        input.read();
 
         roll1 = (int) (Math.random() * 6 + 1);
         roll2 = (int) (Math.random() * 6 + 1);

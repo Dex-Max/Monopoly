@@ -1,6 +1,7 @@
 import java.util.ArrayList;
 
 public class Game {
+    private Input input = new Input();
     private final Board board = new Board();
     private Dice dice = new Dice();
     private ArrayList<Player> players = new ArrayList<Player>();
@@ -11,7 +12,7 @@ public class Game {
 
         for(int i = 1; i <= numPlayers; i++){
             System.out.print("Player " + i + " name: ");
-            players.add(new Player(Input.read()));
+            players.add(new Player(input.read()));
         }
 
         turn(players.get(0));
@@ -20,9 +21,18 @@ public class Game {
     //pass turn to next Player
     private void turn(Player currentPlayer){
         System.out.println("\n" + currentPlayer.getName() + "'s turn!\nPosition: " + board.getSquareAt(currentPlayer.getPosition()).getName() + "\nMoney: $" + currentPlayer.getMoney());
-        currentPlayer.move(dice.roll());
+        currentPlayer.move(dice.roll(input));
         landedOn(currentPlayer);
         showOptions(currentPlayer);
+    }
+
+    private void endTurn(Player currentPlayer){
+        int currentIndex = players.indexOf(currentPlayer);
+        if(currentIndex + 1 == players.size()){
+            turn(players.get(0));
+        } else {
+            turn(players.get(currentIndex + 1));
+        }
     }
 
     private void showOptions(Player currentPlayer){
@@ -30,7 +40,7 @@ public class Game {
         System.out.println("(1) List Properties\n(2) Buy Houses\n(3) End Turn");
 
         try {
-            int choice = Integer.parseInt(Input.read());
+            int choice = Integer.parseInt(input.read());
 
             switch(choice){
                 case 1:
@@ -48,24 +58,8 @@ public class Game {
 
     private void buyHouseOptions(Player currentPlayer){
         System.out.println("Select property to purchase house on: ");
-        selectOptions(currentPlayer.listOwnColorGroup(board));
-    }
-
-    private void endTurn(Player currentPlayer){
-        int currentIndex = players.indexOf(currentPlayer);
-        if(currentIndex + 1 == players.size()){
-            turn(players.get(0));
-        } else {
-            turn(players.get(currentIndex + 1));
-        }
-    }
-
-    public void selectOptions(ArrayList<?> list){
-        for(int i = 1; i <= list.size(); i++){
-            System.out.println(i + ". " + list.get(1).toString());
-        }
-
-
+        ColorProperty houseProperty = (ColorProperty) input.selectOptions(currentPlayer.listOwnColorGroup(board));
+        houseProperty.addHouse();
     }
 
     private void landedOn(Player currentPlayer){
@@ -74,5 +68,4 @@ public class Game {
         System.out.println("Landed on " + currentSquare.getName());
         currentSquare.doAction(currentPlayer);
     }
-
 }

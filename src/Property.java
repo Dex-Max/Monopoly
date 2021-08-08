@@ -1,6 +1,9 @@
 import java.util.Scanner;
 
 public abstract class Property extends Square {
+
+    //TODO move input
+    Input input = new Input();
     private final int price;
     private final int rent;
     private Player owner = null;
@@ -39,7 +42,7 @@ public abstract class Property extends Square {
 
     public void offerBuy(Player currentPlayer){
         System.out.println("Would you like to buy " + name + " for $" + price + "?");
-        String response = Input.read().toLowerCase();
+        String response = input.read().toLowerCase();
 
         if(response.contains("y")){
             currentPlayer.buy(this);
