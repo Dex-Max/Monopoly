@@ -83,7 +83,7 @@ public class Player {
     public ArrayList<ColorProperty> listOwnColorGroup(Board board){
         ArrayList<ColorProperty> list = new ArrayList<>();
         for(Property property: properties){
-            if(property instanceof ColorProperty && ownsGroup(((ColorProperty) property).getGroup(), board)){
+            if(property instanceof ColorProperty && ownsGroup(((ColorProperty) property).getGroup())){
                 list.add((ColorProperty) property);
             }
         }
@@ -95,17 +95,15 @@ public class Player {
         return properties.contains(property);
     }
 
-    public boolean ownsGroup(ColorProperty.Group group, Board board){
-        Square currentSquare;
+    public boolean ownsGroup(ColorProperty.Group group){
+        int count = 0;
 
-        //check each square on the board that is in group, and checks if player owns
-        for(int i = 0; i < 40; i++){
-            currentSquare = board.getSquareAt(i);
-            if(currentSquare instanceof ColorProperty && ((ColorProperty) currentSquare).getGroup() == group && !owns((Property) currentSquare)){
-                return false;
+        for(Property property : properties){
+            if(property instanceof ColorProperty && ((ColorProperty) property).getGroup() == group){
+                count++;
             }
         }
 
-        return true;
+        return (count == group.maxInGroup);
     }
 }

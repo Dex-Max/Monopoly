@@ -42,8 +42,20 @@ public class ColorProperty extends Property {
     public Group getGroup() { return group; }
 
     public enum Group{
-        BROWN, SKY, PINK, ORANGE, RED,
-            YELLOW, GREEN, BLUE
+        BROWN(2),
+        SKY(3),
+        PINK(3),
+        ORANGE(3),
+        RED(3),
+        YELLOW(3),
+        GREEN(3),
+        BLUE(2);
+
+        public final int maxInGroup;
+
+        Group(int maxInGroup){
+            this.maxInGroup = maxInGroup;
+        }
     }
 
     public ColorProperty(String name, Group group, int price, int rent, int rent1, int rent2, int rent3, int rent4, int rentH){
