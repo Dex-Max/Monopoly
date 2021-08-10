@@ -39,7 +39,7 @@ public class Board {
             case 9:
                 return new ColorProperty("Connecticut Avenue", ColorProperty.Group.SKY, 120, 8, 40, 100, 300, 450, 600);
             case 10:
-                return new Square("Jail");
+                return new Square("Just Visiting Jail");
             case 11:
                 return new ColorProperty("St. Charles Place", ColorProperty.Group.PINK, 140, 10, 50, 150, 450, 625, 750);
             case 12:

@@ -3,13 +3,13 @@ public class Square implements Comparable<Square>{
 
     protected final String name;
 
-    public void doAction(Player currentPlayer) {};
-
-    public String getName() { return name; }
-
     public Square(String name){
         this.name = name;
     }
+
+    public void doAction(Player currentPlayer) {};
+
+    public String getName() { return name; }
 
     public String toString(){
         return name;

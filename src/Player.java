@@ -5,6 +5,8 @@ import java.util.Collections;
 
 public class Player {
     private final String name;
+    public boolean inJail = false;
+    public int turnsInJail = 0;
     private int position;
     private int money = 1500;
     private int numUtilities = 0;
@@ -42,6 +44,11 @@ public class Player {
         }
     }
 
+    public void sendToJail(){
+        inJail = true;
+        position = 10;
+    }
+
     //add property to Player's properties
     public void buy(Property property){
         addMoney(-property.getPrice());
@@ -72,6 +79,9 @@ public class Player {
     }
 
     public void listProperties(){
+        if(properties.isEmpty()){
+            System.out.println("You do not own any properties");
+        }
         for(Property property : properties){
             System.out.println(property.getName());
         }

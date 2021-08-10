@@ -1,8 +1,13 @@
 public class Dice {
+    Input input;
     public int roll1;
     public int roll2;
 
-    public int roll(Input input){
+    public Dice(Input input){
+        this.input = input;
+    }
+
+    public int roll(){
         System.out.print("Press enter to roll");
         input.read();
 

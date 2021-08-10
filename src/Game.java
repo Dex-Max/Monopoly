@@ -4,7 +4,8 @@ import java.util.ArrayList;
 public class Game {
     private Input input = new Input();
     private final Board board = new Board();
-    private Dice dice = new Dice();
+    private Jail jail = new Jail();
+    private Dice dice = new Dice(input);
     private ArrayList<Player> players = new ArrayList<Player>();
 
     public Board getBoard() { return board; }
@@ -21,10 +22,16 @@ public class Game {
 
     //pass turn to next Player
     private void turn(Player currentPlayer){
-        System.out.println("\n" + currentPlayer.getName() + "'s turn!\nPosition: " + board.getSquareAt(currentPlayer.getPosition()).getName() + "\nMoney: $" + currentPlayer.getMoney());
-        currentPlayer.move(dice.roll(input));
-        landedOn(currentPlayer);
-        showOptions(currentPlayer);
+        System.out.println("\n" + currentPlayer.getName() + "'s turn!\nMoney: $" + currentPlayer.getMoney());
+
+        if(currentPlayer.inJail){
+            jail.jailTurn(currentPlayer);
+        } else {
+            System.out.println("Position: " + board.getSquareAt(currentPlayer.getPosition()).getName());
+            currentPlayer.move(dice.roll());
+            landedOn(currentPlayer);
+            showOptions(currentPlayer);
+        }
     }
 
     private void endTurn(Player currentPlayer){
@@ -49,6 +56,7 @@ public class Game {
                     showOptions(currentPlayer);
                 case 2:
                     buyHouseOptions(currentPlayer);
+                    showOptions(currentPlayer);
                 case 3:
                     endTurn(currentPlayer);
             }
@@ -58,10 +66,14 @@ public class Game {
     }
 
     private void buyHouseOptions(Player currentPlayer){
-        ArrayList<ColorProperty> houseableProperty;
-        System.out.println("Select property to purchase house on: ");
         ColorProperty houseProperty = (ColorProperty) input.selectOptions(currentPlayer.getHouseableProperties());
-        houseProperty.addHouse();
+
+        if(houseProperty == null){
+            System.out.println("You do not have any properties to place a house on");
+        } else {
+            System.out.println("Select property to purchase house on: ");
+            houseProperty.addHouse();
+        }
     }
 
     private void landedOn(Player currentPlayer){

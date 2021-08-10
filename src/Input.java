@@ -12,9 +12,12 @@ public class Input {
     public Object selectOptions(ArrayList<?> list){
         int input = -1;
 
+        if(list.size() == 0) return null;
+
         for(int i = 1; i <= list.size(); i++){
             System.out.println(i + ". " + list.get(i).toString());
         }
+
         try {
             input = Integer.parseInt(read());
         } catch(NumberFormatException e){
