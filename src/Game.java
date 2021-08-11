@@ -63,12 +63,4 @@ public class Game {
             showOptions(currentPlayer);
         }
     }
-
-    //TODO rid of and combine
-    private void landedOn(Player currentPlayer){
-        Square currentSquare = board.getSquareAt(currentPlayer.getPosition());
-
-        System.out.println("Landed on " + currentSquare);
-        currentSquare.doAction(currentPlayer);
-    }
 }
