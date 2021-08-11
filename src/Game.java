@@ -1,5 +1,5 @@
-import java.awt.image.AreaAveragingScaleFilter;
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class Game {
     private Input input = new Input();
@@ -44,38 +44,24 @@ public class Game {
     }
 
     private void showOptions(Player currentPlayer){
-        System.out.println("Additional Actions:");
-        System.out.println("(1) List Properties\n(2) Buy Houses\n(3) End Turn");
+        ArrayList<PlayerOption> options = new ArrayList<>();
+        Collections.addAll(options,
+                new ListPropertiesOption(currentPlayer),
+                new BuyHouseOption(currentPlayer, input),
+                new EndTurnOption()
+                );
 
-        try {
-            int choice = Integer.parseInt(input.read());
+        PlayerOption selectedOption = (PlayerOption) input.selectOptions(options, "Additional Actions:");
 
-            switch(choice){
-                case 1:
-                    currentPlayer.listProperties();
-                    showOptions(currentPlayer);
-                case 2:
-                    buyHouseOptions(currentPlayer);
-                    showOptions(currentPlayer);
-                case 3:
-                    endTurn(currentPlayer);
-            }
-        } catch (NumberFormatException e){
-            System.out.println("Must enter a valid number");
-        }
-    }
-
-    private void buyHouseOptions(Player currentPlayer){
-        ColorProperty houseProperty = (ColorProperty) input.selectOptions(currentPlayer.getHouseableProperties());
-
-        if(houseProperty == null){
-            System.out.println("You do not have any properties to place a house on");
+        if(selectedOption instanceof EndTurnOption){
+            endTurn(currentPlayer);
         } else {
-            System.out.println("Select property to purchase house on: ");
-            houseProperty.addHouse();
+            selectedOption.action();
+            showOptions(currentPlayer);
         }
     }
 
+    //TODO rid of and combine
     private void landedOn(Player currentPlayer){
         Square currentSquare = board.getSquareAt(currentPlayer.getPosition());
 

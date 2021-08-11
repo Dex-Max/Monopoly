@@ -9,22 +9,25 @@ public class Input {
         return scanner.nextLine();
     }
 
-    public Object selectOptions(ArrayList<?> list){
+    //outputs numbered list of options and returns the selected one
+    public Object selectOptions(ArrayList<?> list, String message){
         int input = -1;
 
         if(list.size() == 0) return null;
 
+        System.out.println(message + " (Enter a number 1 - " + list.size() + ")");
+
         for(int i = 1; i <= list.size(); i++){
-            System.out.println(i + ". " + list.get(i).toString());
+            System.out.println(i + ". " + list.get(i - 1).toString());
         }
 
         try {
             input = Integer.parseInt(read());
         } catch(NumberFormatException e){
             System.out.println("Enter a valid number");
-            selectOptions(list);
+            selectOptions(list, message);
         }
 
-        return list.get(input);
+        return list.get(input - 1);
     }
 }
