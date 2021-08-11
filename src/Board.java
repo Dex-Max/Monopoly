@@ -15,6 +15,10 @@ public class Board {
         return board[position];
     }
 
+    public Square getCurrentSquare(Player player){
+        return getSquareAt(player.getPosition());
+    }
+
     //TODO finish board initialization
     private Square createSquare(int position){
         switch(position){

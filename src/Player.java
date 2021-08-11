@@ -83,7 +83,7 @@ public class Player {
             System.out.println("You do not own any properties");
         }
         for(Property property : properties){
-            System.out.println(property.getName());
+            System.out.println(property);
         }
     }
 

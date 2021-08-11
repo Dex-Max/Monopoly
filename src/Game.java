@@ -27,9 +27,12 @@ public class Game {
         if(currentPlayer.inJail){
             jail.jailTurn(currentPlayer);
         } else {
-            System.out.println("Position: " + board.getSquareAt(currentPlayer.getPosition()).getName());
+            System.out.println("Position: " + board.getCurrentSquare(currentPlayer));
             currentPlayer.move(dice.roll());
-            landedOn(currentPlayer);
+
+            System.out.println("Landed on " + board.getCurrentSquare(currentPlayer));
+            board.getCurrentSquare(currentPlayer).doAction(currentPlayer);
+
             showOptions(currentPlayer);
         }
     }
@@ -65,7 +68,7 @@ public class Game {
     private void landedOn(Player currentPlayer){
         Square currentSquare = board.getSquareAt(currentPlayer.getPosition());
 
-        System.out.println("Landed on " + currentSquare.getName());
+        System.out.println("Landed on " + currentSquare);
         currentSquare.doAction(currentPlayer);
     }
 }

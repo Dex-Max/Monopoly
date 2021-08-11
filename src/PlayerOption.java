@@ -1,6 +1,8 @@
 /*
 interface Option {
     public void action();
+
+    public String toString();
 }
 
  */

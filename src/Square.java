@@ -9,8 +9,6 @@ public class Square implements Comparable<Square>{
 
     public void doAction(Player currentPlayer) {};
 
-    public String getName() { return name; }
-
     public String toString(){
         return name;
     }
