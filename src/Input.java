@@ -4,13 +4,13 @@ import java.util.Scanner;
 public class Input {
 
 
-    public String read(){
+    public static String read(){
         Scanner scanner = new Scanner(System.in);
         return scanner.nextLine();
     }
 
     //outputs numbered list of options and returns the selected one
-    public Object selectOptions(ArrayList<?> list, String message){
+    public static Object selectOptions(ArrayList<?> list, String message){
         int input = -1;
 
         if(list.size() == 0) return null;

@@ -2,10 +2,9 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 public class Game {
-    private Input input = new Input();
     private final Board board = new Board();
     private Jail jail = new Jail();
-    private Dice dice = new Dice(input);
+    private Dice dice = new Dice();
     private ArrayList<Player> players = new ArrayList<Player>();
 
     public Board getBoard() { return board; }
@@ -14,7 +13,7 @@ public class Game {
 
         for(int i = 1; i <= numPlayers; i++){
             System.out.print("Player " + i + " name: ");
-            players.add(new Player(input.read()));
+            players.add(new Player(Input.read()));
         }
 
         turn(players.get(0));
@@ -25,7 +24,7 @@ public class Game {
         System.out.println("\n" + currentPlayer.getName() + "'s turn!\nMoney: $" + currentPlayer.getMoney());
 
         if(currentPlayer.inJail){
-            jail.jailTurn(currentPlayer);
+            jail.jailTurn(currentPlayer, dice);
         } else {
             System.out.println("Position: " + board.getCurrentSquare(currentPlayer));
             currentPlayer.move(dice.roll());
@@ -50,11 +49,11 @@ public class Game {
         ArrayList<PlayerOption> options = new ArrayList<>();
         Collections.addAll(options,
                 new ListPropertiesOption(currentPlayer),
-                new BuyHouseOption(currentPlayer, input),
+                new BuyHouseOption(currentPlayer),
                 new EndTurnOption()
                 );
 
-        PlayerOption selectedOption = (PlayerOption) input.selectOptions(options, "Additional Actions:");
+        PlayerOption selectedOption = (PlayerOption) Input.selectOptions(options, "Additional Actions:");
 
         if(selectedOption instanceof EndTurnOption){
             endTurn(currentPlayer);

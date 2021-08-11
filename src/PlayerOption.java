@@ -49,16 +49,14 @@ class ListPropertiesOption extends PlayerOption{
 
 class BuyHouseOption extends PlayerOption{
     Player player;
-    Input input;
 
-    public BuyHouseOption(Player currentPlayer, Input input){
+    public BuyHouseOption(Player currentPlayer){
         super("Buy Houses");
         player = currentPlayer;
-        this.input = input;
     }
 
     public void action(){
-        ColorProperty houseProperty = (ColorProperty) input.selectOptions(player.getHouseableProperties(), "");
+        ColorProperty houseProperty = (ColorProperty) Input.selectOptions(player.getHouseableProperties(), "");
 
         if(houseProperty == null){
             System.out.println("You do not have any properties to place a house on");
@@ -76,5 +74,19 @@ class EndTurnOption extends PlayerOption{
 
     public void action(){
 
+    }
+}
+
+class PayBailOption extends PlayerOption{
+    Player player;
+
+    public PayBailOption(Player currentPlayer){
+        super("Pay $50");
+        player = currentPlayer;
+    }
+
+    public void action(){
+        player.addMoney(-50);
+        player.inJail = false;
     }
 }
