@@ -1,9 +1,13 @@
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
+import java.util.List;
 
 public class Game {
-    private final Board board = new Board();
-    private Jail jail = new Jail();
+
+    private Jail jail = new Jail(this);
+    private final Board board = new Board(jail);
+
     private Dice dice = new Dice();
     private ArrayList<Player> players = new ArrayList<Player>();
 
@@ -20,23 +24,23 @@ public class Game {
     }
 
     //pass turn to next Player
-    private void turn(Player currentPlayer){
+    public void turn(Player currentPlayer){
         System.out.println("\n" + currentPlayer.getName() + "'s turn!\nMoney: $" + currentPlayer.getMoney());
 
-        if(currentPlayer.inJail){
-            jail.jailTurn(currentPlayer, dice);
-        } else {
+        if(currentPlayer.inJail){ //if player doesn't escape jail on turn, skips to showOptions
+
+            if(!jail.jailTurn(currentPlayer, dice, board)) {
+                showOptions(currentPlayer);
+            }
+        } else { //if player is not in jail
             System.out.println("Position: " + board.getCurrentSquare(currentPlayer));
-            currentPlayer.move(dice.roll());
-
-            System.out.println("Landed on " + board.getCurrentSquare(currentPlayer));
-            board.getCurrentSquare(currentPlayer).doAction(currentPlayer);
-
-            showOptions(currentPlayer);
+            currentPlayer.move(dice.roll(), board);
         }
+
+        showOptions(currentPlayer);
     }
 
-    private void endTurn(Player currentPlayer){
+    public void endTurn(Player currentPlayer){
         int currentIndex = players.indexOf(currentPlayer);
         if(currentIndex + 1 == players.size()){
             turn(players.get(0));
@@ -45,21 +49,17 @@ public class Game {
         }
     }
 
+    //player options after roll and land on a square
     private void showOptions(Player currentPlayer){
-        ArrayList<PlayerOption> options = new ArrayList<>();
-        Collections.addAll(options,
+        List<PlayerOption> options = Arrays.asList(
                 new ListPropertiesOption(currentPlayer),
                 new BuyHouseOption(currentPlayer),
-                new EndTurnOption()
-                );
+                new EndTurnOption(this, currentPlayer)
+        );
 
         PlayerOption selectedOption = (PlayerOption) Input.selectOptions(options, "Additional Actions:");
+        selectedOption.action();
 
-        if(selectedOption instanceof EndTurnOption){
-            endTurn(currentPlayer);
-        } else {
-            selectedOption.action();
-            showOptions(currentPlayer);
-        }
+        showOptions(currentPlayer); //when player does not select end turn
     }
 }

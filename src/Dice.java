@@ -13,6 +13,11 @@ public class Dice {
         return roll1 + roll2;
     }
 
+    //uses value of the dice without rolling
+    public int currentRoll(){
+        return roll1 + roll2;
+    }
+
     public boolean isDouble(){
         return roll1 == roll2;
     }

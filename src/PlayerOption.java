@@ -21,19 +21,6 @@ public abstract class PlayerOption {
     }
 }
 
-class RollOption extends PlayerOption{
-    Dice dice;
-
-    public RollOption(Dice dice){
-        super("Roll");
-        this.dice = dice;
-    }
-
-    public void action(){
-        dice.roll();
-    }
-}
-
 class ListPropertiesOption extends PlayerOption{
     Player player;
 
@@ -68,25 +55,57 @@ class BuyHouseOption extends PlayerOption{
 }
 
 class EndTurnOption extends PlayerOption{
-    public EndTurnOption(){
+    Game game;
+    Player player;
+
+    public EndTurnOption(Game game, Player currentPlayer){
         super("End Turn");
+        this.game = game;
+        player = currentPlayer;
     }
 
     public void action(){
-
+        game.endTurn(player);
     }
 }
 
 class PayBailOption extends PlayerOption{
+    Dice dice;
     Player player;
+    Board board;
 
-    public PayBailOption(Player currentPlayer){
+    public PayBailOption(Dice dice, Player currentPlayer, Board board){
         super("Pay $50");
+        this.dice = dice;
         player = currentPlayer;
+        this.board = board;
     }
 
     public void action(){
         player.addMoney(-50);
         player.inJail = false;
+        player.move(dice.roll(), board);
+    }
+}
+
+class RollOptionJail extends PlayerOption{
+    Dice dice;
+    Player player;
+    Board board;
+
+    public RollOptionJail(Dice dice, Player currentPlayer, Board board){
+        super("Roll");
+        this.dice = dice;
+        player = currentPlayer;
+        this.board = board;
+    }
+
+    public void action(){
+        int roll = dice.roll();
+
+        if(dice.isDouble()){
+            player.inJail = false;
+            player.move(roll, board);
+        }
     }
 }

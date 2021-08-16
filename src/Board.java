@@ -1,7 +1,10 @@
 public class Board {
     private final Square[] board = new Square[40];
+    public Jail jail;
 
-    public Board(){
+    public Board(Jail jail){
+        this.jail = jail;
+
         //creating all squares on the board
         for(int i = 0; i < 40; i++){
             board[i] = createSquare(i);
@@ -83,7 +86,12 @@ public class Board {
             case 29:
                 return new ColorProperty("Marvin Gardens", ColorProperty.Group.YELLOW, 280, 24, 120, 360, 850, 1025, 1200);
             case 30:
-                return new Square("Go to Jail");
+                return new Square("Go to Jail"){
+                    @Override
+                    public void doAction(Player currentPlayer){ 
+                        jail.sendToJail(currentPlayer);
+                    }
+                };
             case 31:
                 return new ColorProperty("Pacific Avenue", ColorProperty.Group.GREEN, 300, 26, 130, 390, 900, 1100, 1275);
             case 32:

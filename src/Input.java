@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class Input {
@@ -10,7 +11,7 @@ public class Input {
     }
 
     //outputs numbered list of options and returns the selected one
-    public static Object selectOptions(ArrayList<?> list, String message){
+    public static Object selectOptions(List<?> list, String message){
         int input = -1;
 
         if(list.size() == 0) return null;

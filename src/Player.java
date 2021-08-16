@@ -33,7 +33,7 @@ public class Player {
         addMoney(-amount);
     }
 
-    public void move(int numSquares){
+    public void move(int numSquares, Board board){
         position += numSquares;
 
         //if pass GO
@@ -42,11 +42,16 @@ public class Player {
             money += 200;
             position %= 40;
         }
+
+        System.out.println("Landed on " + board.getCurrentSquare(this));
+        board.getCurrentSquare(this).doAction(this);
     }
 
-    public void sendToJail(){
+    public void sendToJail(Game game){
+        EndTurnOption endTurnOption = new EndTurnOption(game, this);
         inJail = true;
         position = 10;
+        endTurnOption.action();
     }
 
     //add property to Player's properties
