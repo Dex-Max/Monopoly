@@ -34,7 +34,15 @@ public class Game {
             }
         } else { //if player is not in jail
             System.out.println("Position: " + board.getCurrentSquare(currentPlayer));
-            currentPlayer.move(dice.roll(), board);
+            int numDoubles = 0;
+            do{
+                currentPlayer.move(dice.roll(), board);
+                numDoubles++;
+
+                if(numDoubles == 3){
+                    jail.sendToJail(currentPlayer);
+                }
+            } while (numDoubles < 3 && dice.isDouble());
         }
 
         showOptions(currentPlayer);
