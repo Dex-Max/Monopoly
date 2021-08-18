@@ -1,12 +1,28 @@
 public class Utility extends Property {
+    private static Dice dice;
 
-    public Utility(String name){
+    public Utility(String name, Dice dice){
         super(name, 150, 0);
+        Utility.dice = dice;
     }
 
-    //TODO
     @Override
     public int getRent() {
-        return 0;
+        int rent;
+        int roll = dice.currentRoll();
+
+        switch(owner.getNumUtilities()){
+            case 1:
+                rent = 4 * roll;
+                break;
+            case 2:
+                rent = 10 * roll;
+                break;
+            default:
+                rent = -1;
+                break;
+        }
+
+        return rent;
     }
 }

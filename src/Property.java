@@ -3,7 +3,7 @@ import java.util.Scanner;
 public abstract class Property extends Square {
     private final int price;
     private final int rent;
-    private Player owner = null;
+    protected Player owner = null;
 
     public Property(String name, int price, int rent){
         super(name);

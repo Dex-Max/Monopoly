@@ -3,9 +3,28 @@ public class Railroad extends Property {
         super(name, 200, 0);
     }
 
-    //TODO
     @Override
     public int getRent() {
-        return 0;
+        int rent;
+
+        switch(owner.getNumRailroads()){
+            case 1:
+                rent = 25;
+                break;
+            case 2:
+                rent = 50;
+                break;
+            case 3:
+                rent = 100;
+                break;
+            case 4:
+                rent = 200;
+                break;
+            default:
+                rent = -1;
+                break;
+        }
+
+        return rent;
     }
 }

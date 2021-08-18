@@ -1,9 +1,11 @@
 public class Board {
     private final Square[] board = new Square[40];
     public Jail jail;
+    public Dice dice;
 
-    public Board(Jail jail){
+    public Board(Jail jail, Dice dice){
         this.jail = jail;
+        this.dice = dice;
 
         //creating all squares on the board
         for(int i = 0; i < 40; i++){
@@ -50,7 +52,7 @@ public class Board {
             case 11:
                 return new ColorProperty("St. Charles Place", ColorProperty.Group.PINK, 140, 10, 50, 150, 450, 625, 750);
             case 12:
-                return new Utility("Electric Company");
+                return new Utility("Electric Company", dice);
             case 13:
                 return new ColorProperty("States Avenue", ColorProperty.Group.PINK, 140, 10, 50, 150, 450, 625, 750);
             case 14:
@@ -82,7 +84,7 @@ public class Board {
             case 27:
                 return new ColorProperty("Ventnor Avenue", ColorProperty.Group.YELLOW, 260, 22, 110, 330, 800, 975, 1150);
             case 28:
-                return new Utility("Water Works");
+                return new Utility("Water Works", dice);
             case 29:
                 return new ColorProperty("Marvin Gardens", ColorProperty.Group.YELLOW, 280, 24, 120, 360, 850, 1025, 1200);
             case 30:

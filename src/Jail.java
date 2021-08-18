@@ -11,6 +11,7 @@ public class Jail{ //separate from Visiting Jail square on board
     public void sendToJail(Player jailedPlayer){
         jailedPlayer.inJail = true;
         System.out.println("You are now in Jail for the next 3 turns");
+        jailedPlayer.moveTo(10);
         game.endTurn(jailedPlayer);
     }
 

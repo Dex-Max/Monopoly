@@ -6,9 +6,8 @@ import java.util.List;
 public class Game {
 
     private Jail jail = new Jail(this);
-    private final Board board = new Board(jail);
-
     private Dice dice = new Dice();
+    private final Board board = new Board(jail, dice);
     private ArrayList<Player> players = new ArrayList<Player>();
 
     public Board getBoard() { return board; }

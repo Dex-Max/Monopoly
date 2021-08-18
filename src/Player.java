@@ -47,11 +47,8 @@ public class Player {
         board.getCurrentSquare(this).doAction(this);
     }
 
-    public void sendToJail(Game game){
-        EndTurnOption endTurnOption = new EndTurnOption(game, this);
-        inJail = true;
-        position = 10;
-        endTurnOption.action();
+    public void moveTo(int position){
+        this.position = position;
     }
 
     //add property to Player's properties
@@ -92,6 +89,28 @@ public class Player {
         }
     }
 
+    public int getNumRailroads(){
+        int numRailroads = 0;
+        for(Property p : properties){
+            if(p instanceof Railroad){
+                numRailroads++;
+            }
+        }
+
+        return numRailroads;
+    }
+
+    public int getNumUtilities(){
+        int numUtilities = 0;
+        for(Property p : properties){
+            if(p instanceof Utility){
+                numUtilities++;
+            }
+        }
+
+        return numUtilities;
+    }
+
     //returns list of all properties that Player owns color group
     public ArrayList<ColorProperty> getOwnColorGroupList(){
         ArrayList<ColorProperty> list = new ArrayList<>();
@@ -105,8 +124,22 @@ public class Player {
 
     //return list of all properties that Player can place house
     public ArrayList<ColorProperty> getHouseableProperties(){
-        getOwnColorGroupList().removeIf(property -> property.getNumHouses() == 5);
-        return getOwnColorGroupList();
+        ArrayList<ColorProperty> houseable = new ArrayList<>();
+        for(ColorProperty i : getOwnColorGroupList()){
+            boolean lowestHouses = true;
+
+            for(ColorProperty j : getOwnColorGroupList()){
+                if(i.getGroup() == j.getGroup() && i.getNumHouses() > j.getNumHouses()){
+                    lowestHouses = false;
+                }
+            }
+
+            if(lowestHouses && i.getNumHouses() != 5){
+                houseable.add(i);
+            }
+        }
+
+        return houseable;
     }
 
     //check if property is in Player's properties
