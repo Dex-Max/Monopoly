@@ -1,12 +1,3 @@
-/*
-interface Option {
-    public void action();
-
-    public String toString();
-}
-
- */
-
 public abstract class PlayerOption {
     String message;
 

@@ -1,13 +1,12 @@
 public class Square implements Comparable<Square>{
     protected int index;
-
     protected final String name;
-
-    public void doAction(Player currentPlayer){};
 
     public Square(String name){
         this.name = name;
     }
+
+    public void doAction(Player currentPlayer){};
 
     public String toString(){
         return name;

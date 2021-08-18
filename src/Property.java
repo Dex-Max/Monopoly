@@ -23,6 +23,16 @@ public abstract class Property extends Square {
         return rent;
     }
 
+    public void offerBuy(Player currentPlayer){
+        System.out.println("Would you like to buy " + name + " for $" + price + "?");
+        String response = Input.read().toLowerCase();
+
+        if(response.contains("y")){
+            currentPlayer.buy(this);
+            owner = currentPlayer;
+        }
+    }
+
     @Override
     public void doAction(Player currentPlayer) {
         if(currentPlayer == owner);
@@ -34,16 +44,6 @@ public abstract class Property extends Square {
         } else {
             //square can be bought
             offerBuy(currentPlayer);
-        }
-    }
-
-    public void offerBuy(Player currentPlayer){
-        System.out.println("Would you like to buy " + name + " for $" + price + "?");
-        String response = Input.read().toLowerCase();
-
-        if(response.contains("y")){
-            currentPlayer.buy(this);
-            owner = currentPlayer;
         }
     }
 }

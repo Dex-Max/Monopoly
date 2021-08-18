@@ -10,8 +10,6 @@ public class Game {
     private final Board board = new Board(jail, dice);
     private ArrayList<Player> players = new ArrayList<Player>();
 
-    public Board getBoard() { return board; }
-
     public void startGame(int numPlayers){
 
         for(int i = 1; i <= numPlayers; i++){
