@@ -1,5 +1,3 @@
-import java.util.Scanner;
-
 public abstract class Property extends Square {
     private final int price;
     private final int rent;
