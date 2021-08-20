@@ -24,9 +24,7 @@ public class Input {
             return list.get(input - 1);
         } catch(NumberFormatException | IndexOutOfBoundsException e){
             System.out.println("Enter a valid number");
-            selectOptions(list, message);
+            return selectOptions(list, message);
         }
-
-        return null;
     }
 }

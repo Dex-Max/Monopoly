@@ -31,6 +31,7 @@ public class Game {
         } else { //if player is not in jail
             System.out.println("Position: " + board.getCurrentSquare(currentPlayer));
             int numDoubles = 0;
+
             do{
                 currentPlayer.move(dice.roll(), board);
                 numDoubles++;

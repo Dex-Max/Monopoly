@@ -1,9 +1,9 @@
 public class Utility extends Property {
-    private static Dice dice;
+    private  Dice dice;
 
     public Utility(String name, Dice dice){
         super(name, 150, 0);
-        Utility.dice = dice;
+        this.dice = dice;
     }
 
     @Override
