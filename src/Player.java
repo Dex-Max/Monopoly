@@ -45,8 +45,8 @@ public class Player {
         board.getCurrentSquare(this).doAction(this);
     }
 
-    public void moveTo(int position){
-        this.position = position;
+    public void moveTo(int toPosition, Board board){
+        move((40 - position + toPosition) % 40, board);
     }
 
     //add property to Player's properties
