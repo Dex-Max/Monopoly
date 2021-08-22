@@ -110,7 +110,7 @@ class HouseRepairCard extends CollectCard {
             if(p.getNumHouses() == 5){
                 fee += perHotel;
             } else if (p.getNumHouses() > 0) {
-                fee += perHouse;
+                fee += perHouse * p.getNumHouses();
             }
         }
 
