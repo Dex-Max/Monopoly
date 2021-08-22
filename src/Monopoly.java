@@ -4,10 +4,13 @@ public class Monopoly {
     public static void main(String[] args){
         Dice dice = new Dice();
         Jail jail = new Jail();
-        Board board = new Board(jail, dice);
+        ArrayList<Player> players = createPlayers(2);
+        Board board = new Board(jail, dice, players);
 
-        Game game = new Game(jail, dice, board, createPlayers(2));
+        Game game = new Game(jail, dice, board, players);
         jail.setGame(game);
+
+        game.turn(players.get(0));
     }
 
     static ArrayList<Player> createPlayers(int numPlayers){

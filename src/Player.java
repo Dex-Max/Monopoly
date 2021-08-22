@@ -1,24 +1,25 @@
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Collections;
 
 public class Player {
+    private ArrayList<Property> properties = new ArrayList<Property>();
     private final String name;
-    public boolean inJail = false;
-    public int turnsInJail = 0;
     private int position;
     private int money = 1500;
-    private int numUtilities = 0;
-    private int numRailroads = 0;
-    private ArrayList<Property> properties = new ArrayList<Property>();
+
+    public boolean inJail = false;
+    public int outOfJailCards = 0;
+    public int turnsInJail = 0;
 
     public Player(String name){
         this.name = name;
         position = 0;
     }
 
-    public int getPosition() { return position; }
-
     public String getName() { return name; }
+
+    public int getPosition() { return position; }
 
     public int getMoney() { return money; }
 

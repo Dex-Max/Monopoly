@@ -1,18 +1,13 @@
 public class CardDraw extends Square{
-    private final Card cardType;
+    private Deck deck;
 
-    public enum Card{
-        COMMUNITY_CHEST, CHANCE
+    public CardDraw(Deck deck, String name){
+        super(name);
+        this.deck = deck;
     }
 
-    public CardDraw(Card cardType){
-        super(cardType == Card.COMMUNITY_CHEST ? "Community Chest" : "Chance");
-        this.cardType = cardType;
-    }
-
-    //TODO
     @Override
-    public void doAction(Player p) {
-
+    public void doAction(Player player) {
+        deck.playTop(player);
     }
 }

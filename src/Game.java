@@ -1,3 +1,4 @@
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -15,6 +16,9 @@ public class Game {
         this.players = players;
     }
 
+    public ArrayList<Player> getPlayers (){
+        return players;
+    }
     //pass turn to next Player
     public void turn(Player currentPlayer){
         System.out.println("\n" + currentPlayer.getName() + "'s turn!\nMoney: $" + currentPlayer.getMoney());

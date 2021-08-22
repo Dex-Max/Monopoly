@@ -1,11 +1,17 @@
+import java.util.ArrayList;
+
 public class Board {
     private final Square[] board = new Square[40];
-    private final Jail jail;
-    private final Dice dice;
+    private Deck communityChest = new Deck();
+    private Deck chance = new Deck();
+    public Jail jail;
+    public Dice dice;
+    public ArrayList<Player> players;
 
-    public Board(Jail jail, Dice dice){
+    public Board(Jail jail, Dice dice, ArrayList<Player> players){
         this.jail = jail;
         this.dice = dice;
+        this.players = players;
 
         //creating all squares on the board
         for(int i = 0; i < 40; i++){
@@ -14,10 +20,10 @@ public class Board {
         }
 
         //create community chest/chance deck
-    }
-
-    public Jail getJail(){
-        return jail;
+        for(int c = 0; c < 16; c++){
+            communityChest.add(createCommunityChestCard(c));
+            chance.add(createChanceCard(c));
+        }
     }
 
     public Square getSquareAt(int position){
@@ -36,7 +42,7 @@ public class Board {
             case 1:
                 return new ColorProperty("Mediterranean Avenue", ColorProperty.Group.BROWN, 60, 2, 10, 30, 90, 160, 250);
             case 2:
-                return new CardDraw(CardDraw.Card.COMMUNITY_CHEST);
+                return new CardDraw(communityChest, "Community Chest");
             case 3:
                 return new ColorProperty("Baltic Avenue", ColorProperty.Group.BROWN, 60, 4, 20, 60, 180, 320, 450);
             case 4:
@@ -46,7 +52,7 @@ public class Board {
             case 6:
                 return new ColorProperty("Oriental Avenue", ColorProperty.Group.SKY, 100, 6, 30, 90, 270, 400, 550);
             case 7:
-                return new CardDraw(CardDraw.Card.CHANCE);
+                return new CardDraw(chance, "Chance");
             case 8:
                 return new ColorProperty("Vermont Avenue", ColorProperty.Group.SKY, 100, 6, 30, 90, 270, 400, 550);
             case 9:
@@ -66,7 +72,7 @@ public class Board {
             case 16:
                 return new ColorProperty("St. James Place", ColorProperty.Group.ORANGE, 180, 14, 70, 200, 550, 750, 950);
             case 17:
-                return new CardDraw(CardDraw.Card.COMMUNITY_CHEST);
+                return new CardDraw(communityChest, "Community Chest");
             case 18:
                 return new ColorProperty("Tennessee Avenue", ColorProperty.Group.ORANGE, 180, 14, 70, 200, 550, 750, 950);
             case 19:
@@ -76,7 +82,7 @@ public class Board {
             case 21:
                 return new ColorProperty("Kentucky Avenue", ColorProperty.Group.RED, 220, 18, 90, 250, 700, 875, 1050);
             case 22:
-                return new CardDraw(CardDraw.Card.CHANCE);
+                return new CardDraw(chance, "Chance");
             case 23:
                 return new ColorProperty("Indiana Avenue", ColorProperty.Group.RED, 220, 18, 90, 250, 700, 875, 1050);
             case 24:
@@ -103,19 +109,96 @@ public class Board {
             case 32:
                 return new ColorProperty("North Carolina Avenue", ColorProperty.Group.GREEN, 300, 26, 130, 390, 900, 1100, 1275);
             case 33:
-                return new CardDraw(CardDraw.Card.COMMUNITY_CHEST);
+                return new CardDraw(communityChest, "Community Chest");
             case 34:
                 return new ColorProperty("Pennsylvania Avenue", ColorProperty.Group.GREEN, 320, 28, 150, 450, 1000, 1200, 1400);
             case 35:
                 return new Railroad("Short Line");
             case 36:
-                return new CardDraw(CardDraw.Card.CHANCE);
+                return new CardDraw(chance, "Chance");
             case 37:
                 return new ColorProperty("Park Place", ColorProperty.Group.BLUE, 350, 35, 175, 500, 1100, 1300, 1500);
             case 38:
                 return new Tax("LUXURY TAX", 100);
             case 39:
                 return new ColorProperty("Boardwalk", ColorProperty.Group.BLUE, 400, 50, 200, 600, 1400, 1700, 2000);
+            default:
+                return null;
+        }
+    }
+
+    private Card createCommunityChestCard(int index){
+        switch(index){
+            case 0:
+                return new MoveToCard(new int[]{0}, this, "Advance to GO");
+            case 1:
+                return new CollectCard(100, "Life Insurance Matures");
+            case 2:
+                return new CollectCard(10, "Won Second Prize in a Beauty Contest");
+            case 3:
+                return new CollectCard(200, "Bank Error in Your Favor");
+            case 4:
+                return new CollectCard(45, "Sale of Stock");
+            case 5:
+                return new CollectCard(20, "Income Tax Refund");
+            case 6:
+                return new CollectCard(25, "Receive For Services");
+            case 7:
+                return new CollectCard(100, "You Inherit");
+            case 8:
+                return new CollectCard(100, "Xmas Fund Matures");
+            case 9:
+                return new CollectEveryCard(players, 50, "Grand Opera Opening");
+            case 10:
+                return new CollectCard(-50, "Doctor's Fee");
+            case 11:
+                return new CollectCard(-100, "Pay Hospital");
+            case 12:
+                return new CollectCard(-150, "Pay School Tax");
+            case 13:
+                return new HouseRepairCard(40, 115, "Assessed for Street Repairs");
+            case 14:
+                return new ToJailCard(jail);
+            case 15:
+                return new OutOfJailCard();
+            default:
+                return null;
+        }
+    }
+
+    private Card createChanceCard(int index){
+        switch(index){
+            case 0:
+                return new MoveToCard(new int[]{0}, this, "Advance to GO");
+            case 1:
+                return new MoveToCard(new int[]{39}, this, "Take a Walk on the Boardwalk");
+            case 2:
+                return new MoveToCard(new int[]{24}, this, "Advance to Illinois Avenue");
+            case 3:
+                return new MoveToCard(new int[]{11}, this, "Advance to St. Charles Place");
+            case 4:
+                return new MoveToCard(new int[]{5}, this, "Take a ride on the Reading Railroad");
+            case 5:
+            case 6:
+                return new MoveToCard(new int[]{5, 15, 25, 35}, this, "Advance to nearest Railroad");
+            case 7:
+                return new MoveToCard(new int[]{12, 28}, this, "Advance to nearest Utility");
+            case 8:
+                return new MoveCard(-3, this, "Go Back 3 Spaces");
+            case 9:
+                return new CollectCard(50, "Bank pays Dividend");
+            case 10:
+                return new CollectCard(150, "Your Building and Loan Matures");
+            case 11:
+                return new CollectCard(-15, "Pay Poor Tax");
+            case 12:
+                return new CollectEveryCard(players, 50, "You Have Been Elected Chairman of the Board");
+            case 13:
+                return new HouseRepairCard(25, 100, "Make General Repairs on your Property");
+            case 14:
+                return new ToJailCard(jail);
+            case 15:
+                return new OutOfJailCard();
             default:
                 return null;
         }
