@@ -24,6 +24,9 @@ public class Board {
             communityChest.add(createCommunityChestCard(c));
             chance.add(createChanceCard(c));
         }
+
+        communityChest.shuffle();
+        chance.shuffle();
     }
 
     public Square getSquareAt(int position){
@@ -152,9 +155,9 @@ public class Board {
             case 10:
                 return new CollectCard(-50, "Doctor's Fee");
             case 11:
-                return new CollectCard(-100, "Pay Hospital");
+                return new CollectCard(-100, "Hospital Fee");
             case 12:
-                return new CollectCard(-150, "Pay School Tax");
+                return new CollectCard(-150, "School Tax");
             case 13:
                 return new HouseRepairCard(40, 115, "Assessed for Street Repairs");
             case 14:
@@ -190,7 +193,7 @@ public class Board {
             case 10:
                 return new CollectCard(150, "Your Building and Loan Matures");
             case 11:
-                return new CollectCard(-15, "Pay Poor Tax");
+                return new CollectCard(-15, "Poor Tax");
             case 12:
                 return new CollectEveryCard(players, 50, "You Have Been Elected Chairman of the Board");
             case 13:

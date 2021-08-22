@@ -1,27 +1,32 @@
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public abstract class Card {
-    String message;
+    String text;
 
     public Card(String message){
-        this.message = message;
+        this.text = message;
     }
 
     public void play(Player player){
-        System.out.println(message);
         doAction(player);
+        System.out.println("You drew: " + text);
     }
 
     public abstract void doAction(Player player);
 }
 
 class CollectCard extends Card {
-    int amount;
+    protected Integer amount;
 
-    public CollectCard(int amount, String message){
-        super(message);
+    public CollectCard(int amount, String text){
+        super(createCollectMessage(amount, text));
         this.amount = amount;
+    }
+
+    protected static String createCollectMessage(int amount, String text){
+        String collectMessage = text + ". Collect $" + amount;
+        String payMessage = text + ". Pay $" + amount;
+        return (amount > 0) ? collectMessage : payMessage;
     }
 
     public void doAction(Player player){
@@ -32,9 +37,13 @@ class CollectCard extends Card {
 class CollectEveryCard extends CollectCard {
     private ArrayList<Player> players;
 
-    public CollectEveryCard(ArrayList<Player> players, int amount, String message){
-        super(amount, message);
+    public CollectEveryCard(ArrayList<Player> players, int amount, String text){
+        super(amount, createCollectMessage(amount, text));
         this.players = players;
+    }
+
+    protected static String createCollectMessage(int amount, String text){
+        return CollectCard.createCollectMessage(amount, text) + ((amount > 0) ? " from every player" : " to every player");
     }
 
     public void doAction(Player player){
@@ -50,8 +59,8 @@ class MoveCard extends Card {
     private int numSquares;
     private Board board;
 
-    public MoveCard(int numSquares, Board board, String message){
-        super(message);
+    public MoveCard(int numSquares, Board board, String text){
+        super(text);
         this.numSquares = numSquares;
         this.board = board;
     }
@@ -64,8 +73,8 @@ class MoveToCard extends Card {
     private int[] index;
     private Board board;
 
-    public MoveToCard(int[] index, Board board, String message){
-        super(message);
+    public MoveToCard(int[] index, Board board, String text){
+        super(text);
         this.index = index;
         this.board = board;
     }
@@ -84,17 +93,17 @@ class MoveToCard extends Card {
     }
 }
 
-class HouseRepairCard extends Card {
+class HouseRepairCard extends CollectCard {
     private int perHouse;
     private int perHotel;
 
-    public HouseRepairCard(int perHouse, int perHotel, String message){
-        super(message);
+    public HouseRepairCard(int perHouse, int perHotel, String text){
+        super(0, text);
         this.perHouse = perHouse;
         this.perHotel = perHotel;
     }
 
-    public void doAction(Player player){
+    private int calculateFee(Player player){
         int fee = 0;
 
         for(ColorProperty p : player.getOwnColorGroupList()){
@@ -105,7 +114,12 @@ class HouseRepairCard extends Card {
             }
         }
 
-        player.addMoney(-fee);
+        amount = fee;
+        return fee;
+    }
+
+    public void doAction(Player player){
+        player.addMoney(-calculateFee(player));
     }
 }
 

@@ -1,3 +1,4 @@
+import java.util.Collections;
 import java.util.LinkedList;
 
 public class Deck {
@@ -12,5 +13,9 @@ public class Deck {
 
     public void add(Card card){
         deck.addLast(card);
+    }
+
+    public void shuffle(){
+        Collections.shuffle(deck);
     }
 }
