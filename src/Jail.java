@@ -4,14 +4,13 @@ import java.util.List;
 public class Jail{ //separate from Visiting Jail square on board
     private Game game;
 
-    public Jail(Game game){
+    public void setGame(Game game){
         this.game = game;
     }
 
     public void sendToJail(Player jailedPlayer){
         jailedPlayer.inJail = true;
         System.out.println("You are now in Jail for the next 3 turns");
-        jailedPlayer.moveTo(10);
         game.endTurn(jailedPlayer);
     }
 

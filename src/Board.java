@@ -1,7 +1,7 @@
 public class Board {
     private final Square[] board = new Square[40];
-    public Jail jail;
-    public Dice dice;
+    private final Jail jail;
+    private final Dice dice;
 
     public Board(Jail jail, Dice dice){
         this.jail = jail;
@@ -14,6 +14,10 @@ public class Board {
         }
 
         //create community chest/chance deck
+    }
+
+    public Jail getJail(){
+        return jail;
     }
 
     public Square getSquareAt(int position){

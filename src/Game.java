@@ -3,20 +3,16 @@ import java.util.Arrays;
 import java.util.List;
 
 public class Game {
-
-    private Jail jail = new Jail(this);
-    private Dice dice = new Dice();
-    private final Board board = new Board(jail, dice);
+    private final Jail jail;
+    private final Dice dice;
+    private final Board board;
     private ArrayList<Player> players = new ArrayList<Player>();
 
-    public void startGame(int numPlayers){
-
-        for(int i = 1; i <= numPlayers; i++){
-            System.out.print("Player " + i + " name: ");
-            players.add(new Player(Input.read()));
-        }
-
-        turn(players.get(0));
+    public Game(Jail jail, Dice dice, Board board, ArrayList<Player> players){
+        this.jail = jail;
+        this.dice = dice;
+        this.board = board;
+        this.players = players;
     }
 
     //pass turn to next Player
