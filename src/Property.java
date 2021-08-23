@@ -22,6 +22,10 @@ public abstract class Property extends Square {
         return owner;
     }
 
+    public void setOwner(Player newOwner){
+        owner = newOwner;
+    }
+
     public void offerBuy(Player currentPlayer){
         System.out.println("Would you like to buy " + name + " for $" + price + "?");
         String response = Input.read().toLowerCase();

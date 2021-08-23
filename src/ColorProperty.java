@@ -64,6 +64,10 @@ public class ColorProperty extends Property {
 
     public int getNumHouses() { return numHouses; }
 
+    public int getHouseCost() {
+        return houseCost;
+    }
+
     public void addHouse(){
         getOwner().addMoney(-houseCost);
         numHouses++;

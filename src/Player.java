@@ -1,7 +1,9 @@
 import java.awt.*;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
+import java.util.List;
 
 public class Player {
     private ArrayList<Property> properties = new ArrayList<Property>();
@@ -25,7 +27,18 @@ public class Player {
     public int getMoney() { return money; }
 
     public void addMoney(int addMoney){
+        if(money < -addMoney){
+            broke(-addMoney - money);
+        }
+
         this.money += addMoney;
+    }
+
+    private void broke(int amountNeeded){
+        System.out.println("You are missing $" + amountNeeded);
+        List<PlayerOption> options = Arrays.asList(
+                new MortgageOption(this)
+        );
     }
 
     public void pay(Player receiving, int amount){
@@ -58,9 +71,33 @@ public class Player {
         sortPropertiesByGroup(properties);
     }
 
+    public void sell(Property property){
+        addMoney(property.getPrice() / 2);
+        property.setOwner(null);
+    }
+
     public void mortgage(Property property){
         property.mortgaged = true;
         addMoney(property.getPrice() / 2);
+    }
+
+    public void payMortgage(Property property){
+        property.mortgaged = false;
+        addMoney( (int) (-property.getPrice() * 0.55) );
+    }
+
+    public int getWorth(){
+        int total = 0;
+
+        for(Property p : properties){
+            if(p instanceof ColorProperty){
+                total += (((ColorProperty) p).getNumHouses() * ((ColorProperty) p).getHouseCost()) / 2;
+            }
+
+            total += p.getPrice() / 2;
+        }
+
+        return total + money;
     }
 
     private void sortPropertiesByGroup(ArrayList<Property> properties){
@@ -153,13 +190,24 @@ public class Player {
     public ArrayList<Property> getUnimprovedProperties(){
         ArrayList<Property> unimproved = new ArrayList<>();
         for(Property property : properties){
-            if(property instanceof ColorProperty && ((ColorProperty) property).getNumHouses() != 0){
-            } else {
+            if(property instanceof ColorProperty && ((ColorProperty) property).getNumHouses() != 0);
+            else {
                 unimproved.add(property);
             }
         }
 
         return unimproved;
+    }
+
+    public ArrayList<Property> getMortgagedProperties(){
+        ArrayList<Property> mortgaged = new ArrayList<>();
+        for(Property property : properties){
+            if(property.mortgaged){
+                mortgaged.add(property);
+            }
+        }
+
+        return mortgaged;
     }
 
     //check if property is in Player's properties

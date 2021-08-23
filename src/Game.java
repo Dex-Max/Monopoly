@@ -60,6 +60,7 @@ public class Game {
                 new ListPropertiesOption(currentPlayer),
                 new BuyHouseOption(currentPlayer),
                 new MortgageOption(currentPlayer),
+                new PayMortgageOption(currentPlayer),
                 new EndTurnOption(this, currentPlayer)
         );
 

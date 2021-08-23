@@ -63,6 +63,43 @@ class MortgageOption extends PlayerOption {
     }
 }
 
+class PayMortgageOption extends PlayerOption {
+    Player player;
+
+    public PayMortgageOption(Player currentPlayer){
+        super("Pay Mortgage");
+        player = currentPlayer;
+    }
+
+    public void action(){
+        Property payMortProperty = (Property) Input.selectOptions(player.getMortgagedProperties(), "Select a property to pay off mortgage");
+
+        if(payMortProperty == null){
+            System.out.println("You do not have any mortgaged properties");
+        } else {
+            player.payMortgage(payMortProperty);
+        }
+    }
+}
+
+class SellPropertyOption extends PlayerOption {
+    Player player;
+
+    public SellPropertyOption(Player currentPlayer){
+        super("Sell Unimproved Properties");
+        player = currentPlayer;
+    }
+
+    public void action(){
+        Property sellProperty = (Property) Input.selectOptions(player.getUnimprovedProperties(), "Select a property to sell");
+
+        if(sellProperty == null){
+            System.out.println("You do not have properties to sell.");
+        } else {
+            player.sell(sellProperty);
+        }
+    }
+}
 
 class EndTurnOption extends PlayerOption{
     Game game;
