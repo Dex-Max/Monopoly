@@ -1,3 +1,4 @@
+import java.awt.*;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -57,6 +58,11 @@ public class Player {
         sortPropertiesByGroup(properties);
     }
 
+    public void mortgage(Property property){
+        property.mortgaged = true;
+        addMoney(property.getPrice() / 2);
+    }
+
     private void sortPropertiesByGroup(ArrayList<Property> properties){
         ArrayList<Utility> utilities = new ArrayList<>();
         ArrayList<Railroad> railroads = new ArrayList<>();
@@ -77,6 +83,8 @@ public class Player {
 
         sorted.addAll(railroads);
         sorted.addAll(utilities);
+
+        this.properties = sorted;
     }
 
     public void listProperties(){
@@ -139,6 +147,19 @@ public class Player {
         }
 
         return houseable;
+    }
+
+    //return list of properties without houses (that can be mortgaged)
+    public ArrayList<Property> getUnimprovedProperties(){
+        ArrayList<Property> unimproved = new ArrayList<>();
+        for(Property property : properties){
+            if(property instanceof ColorProperty && ((ColorProperty) property).getNumHouses() != 0){
+            } else {
+                unimproved.add(property);
+            }
+        }
+
+        return unimproved;
     }
 
     //check if property is in Player's properties

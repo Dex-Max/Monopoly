@@ -59,6 +59,7 @@ public class Game {
         List<PlayerOption> options = Arrays.asList(
                 new ListPropertiesOption(currentPlayer),
                 new BuyHouseOption(currentPlayer),
+                new MortgageOption(currentPlayer),
                 new EndTurnOption(this, currentPlayer)
         );
 

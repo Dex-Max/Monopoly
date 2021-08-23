@@ -9,7 +9,6 @@ public class Input {
 
     //outputs numbered list of options and returns the selected one
     public static Object selectOptions(List<?> list, String message){
-        int input = -1;
 
         if(list.size() == 0) return null;
 
@@ -20,7 +19,7 @@ public class Input {
         }
 
         try {
-            input = Integer.parseInt(read());
+            int input = Integer.parseInt(read());
             return list.get(input - 1);
         } catch(NumberFormatException | IndexOutOfBoundsException e){
             System.out.println("Enter a valid number");

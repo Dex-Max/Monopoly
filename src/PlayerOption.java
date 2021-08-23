@@ -34,16 +34,35 @@ class BuyHouseOption extends PlayerOption{
     }
 
     public void action(){
-        ColorProperty houseProperty = (ColorProperty) Input.selectOptions(player.getHouseableProperties(), "");
+        ColorProperty houseProperty = (ColorProperty) Input.selectOptions(player.getHouseableProperties(), "Select property to purchase house on: ");
 
         if(houseProperty == null){
             System.out.println("You do not have any properties to place a house on");
         } else {
-            System.out.println("Select property to purchase house on: ");
             houseProperty.addHouse();
         }
     }
 }
+
+class MortgageOption extends PlayerOption {
+    Player player;
+
+    public MortgageOption(Player currentPlayer){
+        super("Mortgage Properties");
+        player = currentPlayer;
+    }
+
+    public void action(){
+        Property mortgageProperty = (Property) Input.selectOptions(player.getUnimprovedProperties(), "Select an unimproved property");
+
+        if(mortgageProperty == null){
+            System.out.println("You do not have any unimproved properties to mortgage");
+        } else {
+            player.mortgage(mortgageProperty);
+        }
+    }
+}
+
 
 class EndTurnOption extends PlayerOption{
     Game game;
